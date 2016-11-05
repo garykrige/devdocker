@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: dev
+  name: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: dev
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: dev
+    spec:
+      containers:
+      - env:
+        - name: GITHUB_USER
+          valueFrom:
+            secretKeyRef:
+              key: user
+              name: github-oauth
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: github-oauth
+        image: garykrige/dev:latest
+        imagePullPolicy: IfNotPresent
+        name: dev
+        ports:
+        - containerPort: 22
+          protocol: TCP
+        - containerPort: 9090
+          protocol: TCP
+        - containerPort: 60001
+          protocol: UDP
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /root/.ssh/users
+          name: authkeys
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: authkeys
+        secret:
+          items:
+          - key: authorizedkeys
+            path: auth
+          secretName: ssh-allowed
