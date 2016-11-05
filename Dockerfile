@@ -18,7 +18,8 @@ RUN curl -sL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-c
 RUN tar -vxf gsdk.tar.gz \
     && google-cloud-sdk/install.sh \
     && /google-cloud-sdk/bin/gcloud components install kubectl
-RUN git clone https://github.com/facebook/watchman.git \
+RUN curl https://github.com/facebook/watchman/archive/v4.7.0.tar.gz -o watchman.tar.gz \
+    && tar -xvf watchman.tar.gz \
     && cd watchman && git checkout v4.7.0\
     && ./autogen.sh \
     && ./configure \
