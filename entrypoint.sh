@@ -28,5 +28,10 @@ git config --global user.email "garykrige@gmail.com"
 git config --global user.naem "Gary Krige"
 git config --global push.default matching
 
+# local cluster hack
+kubectl config set-cluster minikube --server=http://localhost:8080
+kubectl config set-context minikube --cluster=minikube
+kubectl config use-context minikube
+
 # Keep this container running
 sleep infinity
