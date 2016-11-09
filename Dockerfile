@@ -35,13 +35,13 @@ RUN tar -vxf gsdk.tar.gz \
 # Nuclide
 RUN curl -sL https://codeload.github.com/facebook/watchman/tar.gz/v4.7.0 -o watchman.tar.gz \
     && tar -xvf watchman.tar.gz \
+    && rm watchman.tar.gz \
     && cd watchman-4.7.0 \
     && ./autogen.sh \
     && ./configure \
     && make \
     && make install \
-    && npm install -g nuclide \
-    && rm watchman.tar.gz
+    && npm install -g nuclide
 
 # Linters
 RUN easy_install pip && pip install flake8 yapf
