@@ -28,9 +28,17 @@ git config --global user.email "garykrige@gmail.com"
 git config --global user.naem "Gary Krige"
 git config --global push.default matching
 
-# local cluster hack
-kubectl config set-cluster minikube --server=http://localhost:8080
-kubectl config set-context minikube --cluster=minikube
+# local cluster config
+kubectl config set-cluster minikube \
+    --server=https://10.3.0.1 \
+    --certificate-authority=~/.secret/ca.pem
+kubectl config set-credentials default-admin \
+    --certificate-authority=~/.secret/ca.pem \
+    --client-key=~/.secret/admin-key.pem \
+    --client-certificate=~/.secret/admin.pem
+kubectl config set-context minikube \
+    --cluster=minikube \
+    --user=default-admin
 kubectl config use-context minikube
 
 # Keep this container running

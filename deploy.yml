@@ -48,8 +48,8 @@ spec:
           name: dockerdata
         - mountPath: /root/.ssh/users
           name: authkeys
-        - mountPath: /root/.docker/config
-          name: dockerconfig
+        - mountPath: /root/.secret
+          name: kubesecret
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
@@ -63,6 +63,6 @@ spec:
           - key: authorizedkeys
             path: auth
           secretName: ssh-allowed
-      - name: dockerconfig
+      - name: kubesecret
         secret:
-          secretName: docker-config
+          secretName: kubectl-secrets
