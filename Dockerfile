@@ -46,8 +46,7 @@ RUN curl -sL https://codeload.github.com/facebook/watchman/tar.gz/v4.7.0 -o watc
 # Linters
 RUN easy_install pip && pip install flake8 yapf
 
-COPY .profile .
-
 WORKDIR "/root/"
+COPY .profile .
 COPY entrypoint.sh /
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
