@@ -48,6 +48,8 @@ spec:
           name: dockerdata
         - mountPath: /root/.ssh/users
           name: authkeys
+        - mountPath: /root/.docker/config
+          name: dockerconfig
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
@@ -61,3 +63,6 @@ spec:
           - key: authorizedkeys
             path: auth
           secretName: ssh-allowed
+      - name: dockerconfig
+        secret:
+          secretName: docker-config
