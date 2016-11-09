@@ -44,12 +44,17 @@ spec:
         securityContext:
           privileged: true
         volumeMounts:
+        - mountPath: /var/lib/docker
+          name: dockerdata
         - mountPath: /root/.ssh/users
           name: authkeys
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       volumes:
+      - name: dockerdata
+        hostPath:
+          path: /docker-data
       - name: authkeys
         secret:
           items:

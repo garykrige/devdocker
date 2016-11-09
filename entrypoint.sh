@@ -21,5 +21,6 @@ git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=2678400'
 git config --global user.email "garykrige@gmail.com"
 git config --global user.naem "Gary Krige"
+git config --global push.default matching
 
 sleep infinity
