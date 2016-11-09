@@ -9,6 +9,9 @@ chmod 600 .ssh/authorized_keys
 sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/" /etc/ssh/sshd_config
 service ssh start
 
+# This Repo
+git clone https://github.com/garykrige/devdocker
+
 # Superbalist Repos
 git clone https://${GITHUB_TOKEN}@github.com/superbalist/cms.superbalist.com.git
 git clone https://${GITHUB_TOKEN}@github.com/superbalist/superbalist-kubernetes.git
