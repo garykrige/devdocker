@@ -50,6 +50,8 @@ RUN curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.12.2/m
 # Linters
 RUN easy_install pip && pip install flake8 yapf
 
-WORKDIR "/root/"
 COPY entrypoint.sh /
+COPY docker /etc/defaults/docker
+
+WORKDIR "/root/"
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
