@@ -45,7 +45,7 @@ RUN curl -sL https://codeload.github.com/facebook/watchman/tar.gz/v4.7.0 -o watc
 
 # Minikube
 RUN curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.12.2/minikube-linux-amd64 \
-    && chmod +x minikube && sudo mv minikube /usr/local/bin/
+    && chmod +x minikube && mv minikube /usr/local/bin/
 
 # Linters
 RUN easy_install pip && pip install flake8 yapf
