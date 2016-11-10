@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
      curl \
      build-essential \
      python \
@@ -11,7 +11,9 @@ RUN apt-get update && apt-get install -y \
      openssh-server \
      vim \
      mosh \
-     cron
+     cron \
+#     libvirt-bin \
+     qemu-kvm
 
 # Local and Whoami hack for root
 RUN locale-gen en_ZA.UTF-8 \
@@ -42,6 +44,9 @@ RUN curl -sL https://codeload.github.com/facebook/watchman/tar.gz/v4.7.0 -o watc
     && make \
     && make install \
     && npm install -g nuclide
+
+RUN curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.7.0/docker-machine-driver-kvm -o /usr/local/bin/docker-machine-driver-kvm \
+    && chmod +x /usr/local/bin/docker-machine-driver-kvm
 
 # Minikube
 RUN curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.12.2/minikube-linux-amd64 \
